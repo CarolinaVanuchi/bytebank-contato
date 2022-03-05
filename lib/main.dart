@@ -1,4 +1,3 @@
-import 'package:bytebank/screeens/contacts_form.dart';
 import 'package:bytebank/screeens/dashboard.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +15,7 @@ class BytebankApp extends StatelessWidget {
       theme: ThemeData(
         brightness: Brightness.light,
       ),
-      home: ContactsForm(),
+      home: Dashboard(),
     );
   }
 }
