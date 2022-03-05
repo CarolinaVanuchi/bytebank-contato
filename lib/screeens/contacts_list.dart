@@ -11,24 +11,28 @@ class ContactsList extends StatelessWidget {
         backgroundColor: primaryColor,
         title: const Text('Contacts'),
       ),
-        body: ListView(
-          children: [
-            Card(
-              child: ListTile(
-                title: Text('Carol', style: TextStyle(fontSize: 21.0),),
-                subtitle: Text('4545', style: TextStyle(fontSize: 16.0),),
+      body: ListView(
+        children: [
+          Card(
+            child: ListTile(
+              title: Text(
+                'Carol',
+                style: TextStyle(fontSize: 21.0),
+              ),
+              subtitle: Text(
+                '4545',
+                style: TextStyle(fontSize: 16.0),
               ),
             ),
-          ],
-        ),
-        floatingActionButton: FloatingActionButton(
+          ),
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
           backgroundColor: primaryColor,
           onPressed: null,
           child: Icon(
             Icons.add,
-          )
-        ),
+          )),
     );
   }
-  
 }

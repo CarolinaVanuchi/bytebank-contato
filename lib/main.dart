@@ -1,4 +1,4 @@
-import 'package:bytebank/screeens/contacts_list.dart';
+import 'package:bytebank/screeens/contacts_form.dart';
 import 'package:bytebank/screeens/dashboard.dart';
 import 'package:flutter/material.dart';
 
@@ -8,7 +8,6 @@ void main() {
 
 class BytebankApp extends StatelessWidget {
   const BytebankApp({Key? key}) : super(key: key);
-  
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +16,7 @@ class BytebankApp extends StatelessWidget {
       theme: ThemeData(
         brightness: Brightness.light,
       ),
-      home: Dashboard(),
+      home: ContactsForm(),
     );
   }
 }
