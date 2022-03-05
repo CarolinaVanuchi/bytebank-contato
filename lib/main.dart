@@ -1,3 +1,5 @@
+import 'package:bytebank/screeens/contacts_list.dart';
+import 'package:bytebank/screeens/dashboard.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -17,45 +19,5 @@ class BytebankApp extends StatelessWidget {
       ),
       home: Dashboard(),
     );
-  }
-}
-
-class Dashboard extends StatelessWidget {
-  static const primaryColor = Color.fromARGB(255, 0, 128, 128);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-        title: const Text('Bytebank'),
-        backgroundColor: primaryColor
-        ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Image.asset('images/logo.png'),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                padding: const EdgeInsets.all(8.0),
-                height: 100,
-                width: 150,
-                color: primaryColor,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                  Icon(Icons.people, color: Colors.white, size: 32.0,),
-                  Text('Contact', style: TextStyle(color: Colors.white, fontSize: 18.0))
-                ]),
-            )
-            )
-          ],
-        ),
-      );
   }
 }
