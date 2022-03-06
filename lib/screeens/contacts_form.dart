@@ -1,10 +1,7 @@
-// ignore_for_file: prefer_const_constructors
-
-import 'package:bytebank/database/app_database.dart';
+import 'package:bytebank/database/dao/contact_dao.dart';
 import 'package:bytebank/models/contact.dart';
 import 'package:bytebank/screeens/contacts_list.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class ContactsForm extends StatefulWidget {
   @override
@@ -17,7 +14,7 @@ class _ContactsFormState extends State<ContactsForm> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _accountNumberController =
       TextEditingController();
-
+  final ContactDao _dao = ContactDao();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,8 +52,8 @@ class _ContactsFormState extends State<ContactsForm> {
                               int.tryParse(_accountNumberController.text);
 
                           Contact newContact = Contact(0, name, accountNumber);
-                          save(newContact).then((id) => Navigator.of(context)
-                              .push(MaterialPageRoute(
+                          _dao.save(newContact).then((id) =>
+                              Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) => ContactsList())));
                         },
                         child: Text('Create'),
