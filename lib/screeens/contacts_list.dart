@@ -1,3 +1,5 @@
+import 'package:bytebank/database/app_database.dart';
+import 'package:bytebank/models/contact.dart';
 import 'package:bytebank/screeens/contacts_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -12,34 +14,75 @@ class ContactsList extends StatelessWidget {
         backgroundColor: primaryColor,
         title: const Text('Contacts'),
       ),
-      body: ListView(
-        children: [
-          Card(
-            child: ListTile(
-              title: Text(
-                'Carol',
-                style: TextStyle(fontSize: 21.0),
-              ),
-              subtitle: Text(
-                '4545',
-                style: TextStyle(fontSize: 16.0),
-              ),
-            ),
-          ),
-        ],
+      body: FutureBuilder<List<Contact>>(
+        initialData: [],
+        future: findAll(),
+        builder: (context, snapshot) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.none:
+              break;
+            case ConnectionState.waiting:
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    CircularProgressIndicator(),
+                    Text('Loading'),
+                  ],
+                ),
+              );
+
+            case ConnectionState.active:
+              break;
+            case ConnectionState.done:
+              final contacts = (snapshot.data as List<Contact>);
+              return ListView.builder(
+                itemBuilder: (context, index) {
+                  final Contact contact = contacts[index];
+                  return _ContactItem(contact);
+                },
+                itemCount: contacts.length,
+              );
+          }
+          return Text('Unknow error');
+        },
       ),
       floatingActionButton: FloatingActionButton(
           backgroundColor: primaryColor,
           onPressed: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => ContactsForm(),
-              ),
-            ).then((newContact) => debugPrint(newContact.toString()));
+            Navigator.of(context)
+                .push(
+                  MaterialPageRoute(
+                    builder: (context) => ContactsForm(),
+                  ),
+                )
+                .then((newContact) => debugPrint(newContact.toString()));
           },
           child: Icon(
             Icons.add,
           )),
+    );
+  }
+}
+
+class _ContactItem extends StatelessWidget {
+  final Contact contact;
+  _ContactItem(this.contact);
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: ListTile(
+        title: Text(
+          contact.name.toString(),
+          style: TextStyle(fontSize: 21.0),
+        ),
+        subtitle: Text(
+          contact.accountNumber.toString(),
+          style: TextStyle(fontSize: 16.0),
+        ),
+      ),
     );
   }
 }
