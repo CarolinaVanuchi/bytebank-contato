@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:bytebank/database/app_database.dart';
 import 'package:bytebank/models/contact.dart';
+import 'package:bytebank/screeens/contacts_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -13,7 +15,8 @@ class _ContactsFormState extends State<ContactsForm> {
   static const primaryColor = Color.fromARGB(255, 0, 128, 128);
 
   final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _accountNumberController = TextEditingController();
+  final TextEditingController _accountNumberController =
+      TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +39,7 @@ class _ContactsFormState extends State<ContactsForm> {
                 Padding(
                   padding: const EdgeInsets.only(top: 8.0),
                   child: TextField(
-                    controller: _accountNumberController,
+                      controller: _accountNumberController,
                       decoration: InputDecoration(labelText: 'Account Number'),
                       style: TextStyle(fontSize: 16.0),
                       keyboardType: TextInputType.number),
@@ -48,10 +51,13 @@ class _ContactsFormState extends State<ContactsForm> {
                       child: ElevatedButton(
                         onPressed: () {
                           final String name = _nameController.text;
-                          final int? accountNumber = int.tryParse(_accountNumberController.text);
+                          final int? accountNumber =
+                              int.tryParse(_accountNumberController.text);
 
                           Contact newContact = Contact(0, name, accountNumber);
-                          Navigator.pop(context, newContact);
+                          save(newContact).then((id) => Navigator.of(context)
+                              .push(MaterialPageRoute(
+                                  builder: (context) => ContactsList())));
                         },
                         child: Text('Create'),
                         style: ElevatedButton.styleFrom(primary: primaryColor),
