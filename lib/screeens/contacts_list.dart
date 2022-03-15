@@ -11,10 +11,10 @@ class ContactsList extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: primaryColor,
-        title: const Text('Contacts'),
+        title: const Text('Transfer'),
       ),
       body: FutureBuilder<List<Contact>>(
-        initialData: [],
+        initialData: const [],
         future: _dao.findAll(),
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
@@ -26,7 +26,7 @@ class ContactsList extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
+                  children: const [
                     CircularProgressIndicator(),
                     Text('Loading'),
                   ],
