@@ -1,7 +1,9 @@
+import 'package:bytebank/components/progresss.dart';
 import 'package:bytebank/database/dao/contact_dao.dart';
 import 'package:bytebank/models/contact.dart';
 import 'package:bytebank/screeens/contacts_form.dart';
 import 'package:flutter/material.dart';
+
 class ContactsList extends StatelessWidget {
   static const primaryColor = Color.fromARGB(255, 0, 128, 128);
   final ContactDao _dao = ContactDao();
@@ -21,18 +23,8 @@ class ContactsList extends StatelessWidget {
             case ConnectionState.none:
               break;
             case ConnectionState.waiting:
-             debugPrint('waiting');
-              return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: const [
-                    CircularProgressIndicator(),
-                    Text('Loading'),
-                  ],
-                ),
-              );
-
+              debugPrint('waiting');
+              return Progress();
             case ConnectionState.active:
               break;
             case ConnectionState.done:
